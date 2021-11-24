@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import theme from './theme';
+import theme from '../styles/theme';
 
 export default class MyApp extends App {
   componentDidMount() {
