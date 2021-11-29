@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+import FormAddProduct from '../components/Form/form.component';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,7 +15,7 @@ import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  Table: {
+  table: {
     paddingTop: '30px',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -43,7 +45,7 @@ const Inventory: React.FC = () => {
   return (
     <div>
       <h2>Inventory</h2>
-      <TableContainer sx={{ maxWidth: 600 }} className={classes.Table}>
+      <TableContainer sx={{ maxWidth: 600 }} className={classes.table}>
         <Table size='medium' aria-label='simple table'>
           <TableHead>
             <TableRow>
@@ -84,6 +86,7 @@ const Inventory: React.FC = () => {
           </ButtonGroup>
         </Table>
       </TableContainer>
+      <FormAddProduct />
     </div>
   );
 };
