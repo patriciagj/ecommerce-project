@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import FormAddProduct from '../components/Form/form.component';
+import FormAddProduct from '../components/form/form.component';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

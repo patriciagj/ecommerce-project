@@ -5,6 +5,9 @@ import Head from 'next/head';
 import React from 'react';
 import theme from '../styles/theme';
 
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+
 export default class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
@@ -29,7 +32,9 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         </ThemeProvider>
       </React.Fragment>
     );
