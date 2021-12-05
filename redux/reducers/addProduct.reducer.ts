@@ -11,14 +11,14 @@ const addProducts = (state = initialState, action: Action) => {
         ...state,
         {
           id: uuidv4(),
-          name: action.payload.product_name,
+          name: action.payload.name,
           price: action.payload.price,
           quantity: action.payload.quantity,
         },
       ];
 
     case ActionType.DELETE_PRODUCT:
-      return state.filter(index => index !== action.payload);
+      return state.filter(id => id !== action.payload);
     default:
       return state;
   }

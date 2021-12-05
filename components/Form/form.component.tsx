@@ -19,11 +19,11 @@ const FormAddProduct: React.FC = () => {
   //add product handler method
   const addProduct = (event: any) => {
     event.preventDefault();
-    // console.log(event.target.product_name.value);
+    // console.log(event.target.name.value);
     const formData = event.target;
     const newProduct: Product = {
       id: null,
-      product_name: formData.product_name.value,
+      name: formData.name.value,
       price: formData.price.value,
       quantity: formData.quantity.value,
     };
@@ -46,7 +46,7 @@ const FormAddProduct: React.FC = () => {
           id='outlined-search'
           size='small'
           label='Enter Product Name'
-          name='product_name'
+          name='name'
           type='search'
         />
         <Typography variant='h6' component='div'>

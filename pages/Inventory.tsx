@@ -1,5 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/rootReducer';
+import { Product } from '../types/interface.product';
 
 import FormAddProduct from '../components/form/form.component';
 
@@ -41,6 +44,7 @@ const rows = [
 
 const Inventory: React.FC = () => {
   const classes = useStyles();
+  const newProducts = useSelector((state: RootState) => state.addProducts);
 
   return (
     <div>
@@ -56,6 +60,26 @@ const Inventory: React.FC = () => {
               <TableCell align='center'>Actions</TableCell>
             </TableRow>
           </TableHead>
+          <TableBody>
+            {newProducts.map((product: Product) => (
+              <TableRow
+                key={product.id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component='th' scope='row'>
+                  {product.name}
+                </TableCell>
+                <TableCell align='center'>{product.id}</TableCell>
+                <TableCell align='center'>{product.quantity}</TableCell>
+                <TableCell align='center'>{product.price}</TableCell>
+                <TableCell align='center'>
+                  <Button size='small' variant='contained'>
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
           <TableBody>
             {rows.map(row => (
               <TableRow
