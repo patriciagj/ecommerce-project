@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
+import addAndDeleteAction from '../redux/actions/addAndDelete.action';
 import { Product } from '../types/interface.product';
 
 import FormAddProduct from '../components/form/form.component';
@@ -45,6 +46,12 @@ const rows = [
 const Inventory: React.FC = () => {
   const classes = useStyles();
   const newProducts = useSelector((state: RootState) => state.addProducts);
+  const dispatch = useDispatch();
+
+  //delete product handler method
+  const deleteProduct = (product: any) => {
+    dispatch(addAndDeleteAction.deleteProduct(product));
+  };
 
   return (
     <div>
@@ -73,7 +80,11 @@ const Inventory: React.FC = () => {
                 <TableCell align='center'>{product.quantity}</TableCell>
                 <TableCell align='center'>{product.price}</TableCell>
                 <TableCell align='center'>
-                  <Button size='small' variant='contained'>
+                  <Button
+                    size='small'
+                    variant='contained'
+                    onClick={() => deleteProduct(product)}
+                  >
                     Delete
                   </Button>
                 </TableCell>
