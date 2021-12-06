@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
@@ -48,15 +48,20 @@ const Inventory: React.FC = () => {
   const newProducts = useSelector((state: RootState) => state.addProducts);
   const dispatch = useDispatch();
 
+  const [showFormComponent, setShowForm] = React.useState(false);
+
   //delete product handler method
   const deleteProduct = (product: any) => {
     dispatch(addAndDeleteAction.deleteProduct(product));
   };
 
+  //show form component when btn is clicked
+  const showForm = () => setShowForm(!showFormComponent);
+
   return (
     <div>
       <h2>Inventory</h2>
-      <TableContainer sx={{ maxWidth: 600 }} className={classes.table}>
+      <TableContainer sx={{ maxWidth: 800 }} className={classes.table}>
         <Table size='medium' aria-label='simple table'>
           <TableHead>
             <TableRow>
@@ -76,7 +81,7 @@ const Inventory: React.FC = () => {
                 <TableCell component='th' scope='row'>
                   {product.name}
                 </TableCell>
-                <TableCell align='center'>{product.id}</TableCell>
+                <TableCell align='center'>{product.id.slice(0, 6)}</TableCell>
                 <TableCell align='center'>{product.quantity}</TableCell>
                 <TableCell align='center'>{product.price}</TableCell>
                 <TableCell align='center'>
@@ -113,7 +118,7 @@ const Inventory: React.FC = () => {
             ))}
           </TableBody>
           <ButtonGroup size='small' variant='contained'>
-            <Button>Add New Item</Button>
+            <Button onClick={showForm}>Add New Item</Button>
             <Button>Orders </Button>
             <Link href='/'>
               <Button>Home Page </Button>
@@ -121,7 +126,7 @@ const Inventory: React.FC = () => {
           </ButtonGroup>
         </Table>
       </TableContainer>
-      <FormAddProduct />
+      {showFormComponent && <FormAddProduct />}
     </div>
   );
 };

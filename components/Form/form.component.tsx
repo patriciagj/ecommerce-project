@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import addAndDeleteAction from '../../redux/actions/addAndDelete.action';
 import { Product } from '../../types/interface.product';
 
@@ -11,10 +11,9 @@ import useStyles from './form.component.styles';
 
 const FormAddProduct: React.FC = () => {
   const classes = useStyles();
-  const addProducts = useSelector(state => state);
   const dispatch = useDispatch();
 
-  const [products, setNewProduct] = useState([]);
+  // const [products, setNewProduct] = useState([]);
 
   //add product handler method
   const addProduct = (event: any) => {
