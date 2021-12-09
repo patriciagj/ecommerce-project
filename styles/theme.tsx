@@ -6,7 +6,6 @@ const lightGrey = grey['600'];
 const lightRed = red['400'];
 const colorBackground = grey['50'];
 
-// Create a theme instance.
 const theme = createTheme({
   palette: {
     primary: {
@@ -20,6 +19,12 @@ const theme = createTheme({
     },
     background: {
       default: colorBackground,
+    },
+  },
+  typography: {
+    h4: { fontWeight: 'bold', fontSize: '20px', textTransform: 'uppercase' },
+    h6: {
+      fontSize: '15px',
     },
   },
 });

@@ -6,6 +6,8 @@ const useStyles = makeStyles(() => ({
     marginRight: 'auto',
     textAlign: 'center',
     paddingTop: '100px',
+    paddingBottom: '100px',
+    maxWidth: 250,
   },
 }));
 

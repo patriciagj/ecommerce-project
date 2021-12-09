@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import addAndDeleteAction from '../../redux/actions/addAndDelete.action';
 import { Product } from '../../types/interface.product';
 
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -38,39 +39,46 @@ const FormAddProduct: React.FC = () => {
   return (
     <div>
       <form className={classes.form} onSubmit={addProduct}>
-        <Typography variant='h6' component='div'>
-          Product Name:
-        </Typography>
-        <TextField
-          id='outlined-search'
-          size='small'
-          label='Enter Product Name'
-          name='name'
-          type='search'
-        />
-        <Typography variant='h6' component='div'>
-          Price:
-        </Typography>
-        <TextField
-          size='small'
-          id='outlined-search'
-          label='Price in Euro'
-          name='price'
-          type='text'
-        />
-        <Typography variant='h6' component='div'>
-          Quantity:
-        </Typography>
-        <TextField
-          id='outlined-search'
-          size='small'
-          label='How many?'
-          name='quantity'
-          type='number'
-        />
-        <Button size='small' variant='contained' type='submit'>
-          Add to Inventory
-        </Button>
+        <Stack spacing={2}>
+          <Typography variant='h6' component='div'>
+            Product Name:
+          </Typography>
+          <TextField
+            size='small'
+            id='outlined-search'
+            label='Enter Product Name'
+            name='name'
+            type='search'
+          />
+          <Typography variant='h6' component='div'>
+            Price:
+          </Typography>
+          <TextField
+            size='small'
+            id='outlined-search'
+            label='Price in Euro'
+            name='price'
+            type='text'
+          />
+          <Typography variant='h6' component='div'>
+            Quantity:
+          </Typography>
+          <TextField
+            size='small'
+            id='outlined-search'
+            label='How many?'
+            name='quantity'
+            type='number'
+          />
+          <Button
+            size='small'
+            color='primary'
+            variant='contained'
+            type='submit'
+          >
+            Add to Inventory
+          </Button>
+        </Stack>
       </form>
     </div>
   );

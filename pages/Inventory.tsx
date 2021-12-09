@@ -7,6 +7,7 @@ import { Product } from '../types/interface.product';
 
 import FormAddProduct from '../components/form/form.component';
 
+import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,10 +16,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import AddRounded from '@mui/icons-material/AddRounded';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
+  inventory: {
+    marginTop: '50px',
+  },
   table: {
     paddingTop: '30px',
     marginLeft: 'auto',
@@ -59,14 +67,16 @@ const Inventory: React.FC = () => {
   const showForm = () => setShowForm(!showFormComponent);
 
   return (
-    <div>
-      <h2>Inventory</h2>
+    <div className={classes.inventory}>
+      <Typography variant='h4' align='center'>
+        Inventory
+      </Typography>
       <TableContainer sx={{ maxWidth: 800 }} className={classes.table}>
         <Table size='medium' aria-label='simple table'>
           <TableHead>
             <TableRow>
+              <TableCell align='left'>ID</TableCell>
               <TableCell>Product/Item</TableCell>
-              <TableCell align='right'>ID</TableCell>
               <TableCell align='right'>Quantity/Stock</TableCell>
               <TableCell align='right'>Price</TableCell>
               <TableCell align='center'>Actions</TableCell>
@@ -79,15 +89,36 @@ const Inventory: React.FC = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component='th' scope='row'>
-                  {product.name}
+                  {product.id.slice(0, 6)}
                 </TableCell>
-                <TableCell align='center'>{product.id.slice(0, 6)}</TableCell>
-                <TableCell align='center'>{product.quantity}</TableCell>
+                <TableCell align='left'>{product.name}</TableCell>
+                <TableCell align='center'>
+                  <label htmlFor='icon-button-file'>
+                    <IconButton
+                      color='primary'
+                      aria-label='increase stock'
+                      component='span'
+                    >
+                      <AddRounded />
+                    </IconButton>
+                  </label>
+                  {product.quantity}
+                  <label htmlFor='icon-button-file'>
+                    <IconButton
+                      color='primary'
+                      aria-label='decrease stock'
+                      component='span'
+                    >
+                      <RemoveRoundedIcon />
+                    </IconButton>
+                  </label>
+                </TableCell>
                 <TableCell align='center'>{product.price}</TableCell>
                 <TableCell align='center'>
                   <Button
                     size='small'
                     variant='contained'
+                    startIcon={<DeleteRoundedIcon />}
                     onClick={() => deleteProduct(product)}
                   >
                     Delete
@@ -103,14 +134,39 @@ const Inventory: React.FC = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component='th' scope='row'>
-                  {row.product}
+                  {row.id}
                 </TableCell>
-                <TableCell align='center'>{row.id}</TableCell>
-                <TableCell align='center'>{row.quantity}</TableCell>
+                <TableCell align='left'>{row.product}</TableCell>
+                <TableCell align='center'>
+                  {' '}
+                  <label htmlFor='icon-button-file'>
+                    <IconButton
+                      color='primary'
+                      aria-label='increase stock'
+                      component='span'
+                    >
+                      <AddRounded />
+                    </IconButton>
+                  </label>
+                  {row.quantity}
+                  <label htmlFor='icon-button-file'>
+                    <IconButton
+                      color='primary'
+                      aria-label='decrease stock'
+                      component='span'
+                    >
+                      <RemoveRoundedIcon />
+                    </IconButton>
+                  </label>
+                </TableCell>
                 <TableCell align='center'>{row.price}</TableCell>
                 <TableCell align='center'>
                   {row.actions}
-                  <Button size='small' variant='contained'>
+                  <Button
+                    size='small'
+                    variant='contained'
+                    startIcon={<DeleteRoundedIcon />}
+                  >
                     Delete
                   </Button>
                 </TableCell>
