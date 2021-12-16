@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 import addAndDeleteAction from '../redux/actions/addAndDelete.action';
+import quantityAction from '../redux/actions/quantity.action';
 import { Product } from '../types/interface.product';
 
 import FormAddProduct from '../components/form/form.component';
@@ -66,6 +67,10 @@ const Inventory: React.FC = () => {
   //show form component when btn is clicked
   const showForm = () => setShowForm(!showFormComponent);
 
+  //increase quantity in stock
+  const increaseStock = (product: any) =>
+    dispatch(quantityAction.increment(product));
+
   return (
     <div className={classes.inventory}>
       <Typography variant='h4' align='center'>
@@ -98,6 +103,7 @@ const Inventory: React.FC = () => {
                       color='primary'
                       aria-label='increase stock'
                       component='span'
+                      onClick={() => increaseStock(product)}
                     >
                       <AddRounded />
                     </IconButton>

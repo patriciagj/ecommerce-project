@@ -2,3 +2,8 @@ export enum ActionType {
   ADD_PRODUCT = 'ADD_PRODUCT',
   DELETE_PRODUCT = 'DELETE_PRODUCT',
 }
+
+export enum QtyActionType {
+  INCREMENT_QTY = 'INCREMENT_QTY',
+  DECREMENT_QTY = 'DECREMENT_QTY',
+}

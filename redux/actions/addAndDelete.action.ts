@@ -8,7 +8,7 @@ const addProduct = (product: Product) => {
   };
 };
 
-const deleteProduct = (id: number) => {
+const deleteProduct = (id: string) => {
   return {
     type: ActionType.DELETE_PRODUCT,
     payload: id,
