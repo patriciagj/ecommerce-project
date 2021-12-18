@@ -6,7 +6,7 @@ import React from 'react';
 import theme from '../styles/theme';
 
 import { Provider } from 'react-redux';
-import store from '../redux/store';
+import { store } from '../redux/store';
 
 export default class MyApp extends App {
   componentDidMount() {

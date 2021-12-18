@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../redux/rootReducer';
-import addAndDeleteAction from '../redux/actions/addAndDelete.action';
-import quantityAction from '../redux/actions/quantity.action';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import {
+  deleteProduct,
+  incrementQuantity,
+  decrementQuantity,
+} from '../redux/inventorySlice';
 import { Product } from '../types/interface.product';
 
 import FormAddProduct from '../components/form/form.component';
@@ -54,22 +56,13 @@ const rows = [
 
 const Inventory: React.FC = () => {
   const classes = useStyles();
-  const newProducts = useSelector((state: RootState) => state.addProducts);
-  const dispatch = useDispatch();
+  const newProducts = useAppSelector(state => state.inventory);
+  const dispatch = useAppDispatch();
 
-  const [showFormComponent, setShowForm] = React.useState(false);
-
-  //delete product handler method
-  const deleteProduct = (product: any) => {
-    dispatch(addAndDeleteAction.deleteProduct(product));
-  };
+  const [showFormComponent, setShowForm] = useState(false);
 
   //show form component when btn is clicked
   const showForm = () => setShowForm(!showFormComponent);
-
-  //increase quantity in stock
-  const increaseStock = (product: any) =>
-    dispatch(quantityAction.increment(product));
 
   return (
     <div className={classes.inventory}>
@@ -103,7 +96,7 @@ const Inventory: React.FC = () => {
                       color='primary'
                       aria-label='increase stock'
                       component='span'
-                      onClick={() => increaseStock(product)}
+                      onClick={() => dispatch(incrementQuantity(product.id))}
                     >
                       <AddRounded />
                     </IconButton>
@@ -114,6 +107,7 @@ const Inventory: React.FC = () => {
                       color='primary'
                       aria-label='decrease stock'
                       component='span'
+                      onClick={() => dispatch(decrementQuantity(product.id))}
                     >
                       <RemoveRoundedIcon />
                     </IconButton>
@@ -125,7 +119,7 @@ const Inventory: React.FC = () => {
                     size='small'
                     variant='contained'
                     startIcon={<DeleteRoundedIcon />}
-                    onClick={() => deleteProduct(product)}
+                    onClick={() => dispatch(deleteProduct(product.id))}
                   >
                     Delete
                   </Button>

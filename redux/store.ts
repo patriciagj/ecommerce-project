@@ -1,6 +1,18 @@
-import { createStore } from 'redux';
-import rootReducer from './rootReducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import inventorySlice from './inventorySlice';
 
-const store = createStore(rootReducer, composeWithDevTools());
-export default store;
+export const store = configureStore({
+  reducer: {
+    inventory: inventorySlice,
+  },
+  devTools: true,
+});
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

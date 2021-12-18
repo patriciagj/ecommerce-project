@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import addAndDeleteAction from '../../redux/actions/addAndDelete.action';
+import { useAppDispatch } from '../../redux/hooks';
+import { addProduct } from '../../redux/inventorySlice';
 import { Product } from '../../types/interface.product';
 
 import Stack from '@mui/material/Stack';
@@ -12,12 +12,12 @@ import useStyles from './form.component.styles';
 
 const FormAddProduct: React.FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // const [products, setNewProduct] = useState([]);
 
   //add product handler method
-  const addProduct = (event: any) => {
+  const addItem = (event: any) => {
     event.preventDefault();
     // console.log(event.target.name.value);
     const formData = event.target;
@@ -33,12 +33,12 @@ const FormAddProduct: React.FC = () => {
     // setNewProduct([...products, newProduct]);
     // console.log(products);
 
-    dispatch(addAndDeleteAction.addProduct(newProduct));
+    dispatch(addProduct(newProduct));
   };
 
   return (
     <div>
-      <form className={classes.form} onSubmit={addProduct}>
+      <form className={classes.form} onSubmit={addItem}>
         <Stack spacing={2}>
           <Typography variant='h6' component='div'>
             Product Name:
