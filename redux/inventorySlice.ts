@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
+import inventoryData from './inventory.initialState';
 import type { Product } from '../types/interface.product';
 import { v4 as uuidv4 } from 'uuid';
 
 // Define the initial state using that type
-const initialState: Product[] = [];
+const initialState: Product[] = inventoryData;
 
 const findProductIndex = (state: Product[], productID: string) => {
   return state.findIndex((product: Product) => product.id === productID);

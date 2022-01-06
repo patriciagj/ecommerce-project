@@ -37,23 +37,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function createData(
-  id: number,
-  product: string,
-  quantity: number,
-  price: number,
-  actions: any
-) {
-  return { id, product, quantity, price, actions };
-}
-
-const rows = [
-  createData(1, 'Foundation', 159, 24, ''),
-  createData(2, 'Concealer', 237, 37, ''),
-  createData(3, 'Eye Palletes', 262, 24, ''),
-  createData(4, 'Lip Sets', 305, 67, ''),
-];
-
 const Inventory: React.FC = () => {
   const classes = useStyles();
   const newProducts = useAppSelector(state => state.inventory);
@@ -120,52 +103,6 @@ const Inventory: React.FC = () => {
                     variant='contained'
                     startIcon={<DeleteRoundedIcon />}
                     onClick={() => dispatch(deleteProduct(product.id))}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableBody>
-            {rows.map(row => (
-              <TableRow
-                key={row.product}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component='th' scope='row'>
-                  {row.id}
-                </TableCell>
-                <TableCell align='left'>{row.product}</TableCell>
-                <TableCell align='center'>
-                  {' '}
-                  <label htmlFor='icon-button-file'>
-                    <IconButton
-                      color='primary'
-                      aria-label='increase stock'
-                      component='span'
-                    >
-                      <AddRounded />
-                    </IconButton>
-                  </label>
-                  {row.quantity}
-                  <label htmlFor='icon-button-file'>
-                    <IconButton
-                      color='primary'
-                      aria-label='decrease stock'
-                      component='span'
-                    >
-                      <RemoveRoundedIcon />
-                    </IconButton>
-                  </label>
-                </TableCell>
-                <TableCell align='center'>{row.price}</TableCell>
-                <TableCell align='center'>
-                  {row.actions}
-                  <Button
-                    size='small'
-                    variant='contained'
-                    startIcon={<DeleteRoundedIcon />}
                   >
                     Delete
                   </Button>
