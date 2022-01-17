@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { useAppSelector } from '../../redux/hooks';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,9 +10,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import Badge from '@mui/material/Badge';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 
 const NavBar: React.FC = () => {
+  const newBasket = useAppSelector(state => state.basket.basketTotalQuantity);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
@@ -50,7 +54,9 @@ const NavBar: React.FC = () => {
             sx={{ mr: 2 }}
           >
             <Button color='inherit'>
-              <ShoppingBasketRoundedIcon />
+              <Badge color='secondary' badgeContent={newBasket} showZero>
+                <ShoppingBasketRoundedIcon />
+              </Badge>
             </Button>
           </IconButton>
         </Toolbar>
