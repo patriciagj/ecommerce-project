@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { getTotals } from '../../redux/basketSlice';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,7 +15,17 @@ import Badge from '@mui/material/Badge';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 
 const NavBar: React.FC = () => {
-  const newBasket = useAppSelector(state => state.basket.basketTotalQuantity);
+  // option without useEffect hook:
+  // 1. destructuring basketTtotalQuantity from the state
+  // const { basketTotalQuantity } = useAppSelector(state => state.basket);
+  // 2. change badge content: badgeContent={basketTotalQuantity}
+
+  const basket = useAppSelector(state => state.basket);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [basket]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -53,11 +64,17 @@ const NavBar: React.FC = () => {
             aria-label='menu'
             sx={{ mr: 2 }}
           >
-            <Button color='inherit'>
-              <Badge color='secondary' badgeContent={newBasket} showZero>
-                <ShoppingBasketRoundedIcon />
-              </Badge>
-            </Button>
+            <Link href='/basket'>
+              <Button color='inherit'>
+                <Badge
+                  color='secondary'
+                  badgeContent={basket.basketTotalQuantity}
+                  showZero
+                >
+                  <ShoppingBasketRoundedIcon />
+                </Badge>
+              </Button>
+            </Link>
           </IconButton>
         </Toolbar>
       </AppBar>

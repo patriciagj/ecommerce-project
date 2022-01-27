@@ -26,10 +26,63 @@ export const basketSlice = createSlice({
         state.basketItems.push(currItem);
       }
     },
+    removeFromBasket: (state, action: PayloadAction<Product>) => {
+      //1. find the item
+      const nextBasketItems = state.basketItems.filter(
+        basketItem => basketItem.id !== action.payload.id
+      );
+      //2. update the state
+      state.basketItems = nextBasketItems;
+    },
+    decrementQuantityFromBasket: (state, action: PayloadAction<Product>) => {
+      const findItemIndex = state.basketItems.findIndex(
+        basketItem => basketItem.id === action.payload.id
+      );
+      if (state.basketItems[findItemIndex].basketQuantity > 1) {
+        state.basketItems[findItemIndex].basketQuantity -= 1;
+        // check if the item quantity is equal to 1, remove from cart
+      } else if (state.basketItems[findItemIndex].basketQuantity === 1) {
+        const nextBasketItems = state.basketItems.filter(
+          basketItem => basketItem.id !== action.payload.id
+        );
+        state.basketItems = nextBasketItems;
+      }
+    },
+    getTotals: state => {
+      let { total, quantity } = state.basketItems.reduce(
+        // first parameter(basketTotal) is the accumulator
+        (basketTotal, basketItem) => {
+          const { price, basketQuantity } = basketItem;
+          const itemTotal = price * basketQuantity;
+
+          basketTotal.total += itemTotal;
+          basketTotal.quantity += basketQuantity;
+
+          return basketTotal;
+        },
+        // initial value of the accumulator
+        {
+          total: 0,
+          quantity: 0,
+        }
+      );
+      // update the state
+      state.basketTotalAmount = total;
+      state.basketTotalQuantity = quantity;
+    },
+    clearBasket: state => {
+      state.basketItems = [];
+    },
   },
 });
 
-export const { addToBasket } = basketSlice.actions;
+export const {
+  addToBasket,
+  removeFromBasket,
+  decrementQuantityFromBasket,
+  getTotals,
+  clearBasket,
+} = basketSlice.actions;
 
 export const basketState = (state: RootState) => state.basket;
 

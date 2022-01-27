@@ -8,7 +8,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
-import EuroRoundedIcon from '@mui/icons-material/EuroRounded';
 import Button from '@mui/material/Button';
 
 import useStyles from './product-list.styles';
@@ -51,8 +50,7 @@ const ProductList: React.FC = () => {
                       component='div'
                       align='right'
                     >
-                      {price}
-                      <EuroRoundedIcon fontSize='inherit' />
+                      {price}€
                     </Typography>
                   </CardContent>
                   <Button
