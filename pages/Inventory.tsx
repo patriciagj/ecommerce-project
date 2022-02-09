@@ -77,22 +77,22 @@ const Inventory: React.FC = () => {
                   <label htmlFor='icon-button-file'>
                     <IconButton
                       color='primary'
-                      aria-label='increase stock'
+                      aria-label='decrease stock'
                       component='span'
-                      onClick={() => dispatch(incrementQuantity(product.id))}
+                      onClick={() => dispatch(decrementQuantity(product.id))}
                     >
-                      <AddRounded />
+                      <RemoveRoundedIcon />
                     </IconButton>
                   </label>
                   {product.quantity}
                   <label htmlFor='icon-button-file'>
                     <IconButton
                       color='primary'
-                      aria-label='decrease stock'
+                      aria-label='increase stock'
                       component='span'
-                      onClick={() => dispatch(decrementQuantity(product.id))}
+                      onClick={() => dispatch(incrementQuantity(product.id))}
                     >
-                      <RemoveRoundedIcon />
+                      <AddRounded />
                     </IconButton>
                   </label>
                 </TableCell>

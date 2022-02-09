@@ -27,11 +27,11 @@ export const basketSlice = createSlice({
       }
     },
     removeFromBasket: (state, action: PayloadAction<Product>) => {
-      //1. find the item
+      // 1. find the item
       const nextBasketItems = state.basketItems.filter(
         basketItem => basketItem.id !== action.payload.id
       );
-      //2. update the state
+      // 2. update the state
       state.basketItems = nextBasketItems;
     },
     decrementQuantityFromBasket: (state, action: PayloadAction<Product>) => {
