@@ -10,9 +10,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import LocalFloristRoundedIcon from '@mui/icons-material/LocalFloristRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import Badge from '@mui/material/Badge';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
+import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 
 const NavBar: React.FC = () => {
   // option without useEffect hook:
@@ -40,9 +42,24 @@ const NavBar: React.FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            Logo
+          <Typography variant='h4' component='div' sx={{ flexGrow: 1 }}>
+            <LocalFloristRoundedIcon />
+            Flowers
           </Typography>
+          <IconButton
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
+            sx={{ mr: 2 }}
+          >
+            <Link href='/Inventory'>
+              <Button color='inherit'>
+                <Inventory2RoundedIcon />
+                Inventory
+              </Button>
+            </Link>
+          </IconButton>
           <IconButton
             size='large'
             edge='start'

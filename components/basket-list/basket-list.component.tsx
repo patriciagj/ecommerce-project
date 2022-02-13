@@ -24,6 +24,8 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AddRounded from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
 
 import useStyles from './basket-list.component.styles';
 
@@ -43,6 +45,7 @@ const BasketList: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableCell align='left'>Product</TableCell>
+              <TableCell align='center'></TableCell>
               <TableCell align='center'>Price</TableCell>
               <TableCell align='center'>Quantity</TableCell>
               <TableCell align='center'>Total</TableCell>
@@ -52,15 +55,13 @@ const BasketList: React.FC = () => {
             {basket.basketItems?.map((basketItem: Basket) => (
               <TableRow key={basketItem.id}>
                 <TableCell
-                  align='left'
                   style={{
-                    width: 300,
-                    maxWidth: 280,
+                    width: 200,
+                    maxWidth: 200,
                   }}
                 >
                   <Card
                     style={{
-                      display: 'flex',
                       border: 'none',
                       boxShadow: 'none',
                     }}
@@ -71,25 +72,28 @@ const BasketList: React.FC = () => {
                       image={basketItem.imageUrl}
                       alt={basketItem.name}
                     />
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: 250,
-                      }}
-                    >
-                      <Typography variant='h6' align='center'>
-                        {basketItem.name}
-                      </Typography>
-                      <Button
-                        size='small'
-                        variant='outlined'
-                        onClick={() => dispatch(removeFromBasket(basketItem))}
-                      >
-                        Remove
-                      </Button>
-                    </Box>
                   </Card>
+                </TableCell>
+                <TableCell align='center'>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: 100,
+                      maxWidth: 100,
+                    }}
+                  >
+                    <Typography variant='h6' align='center'>
+                      {basketItem.name}
+                    </Typography>
+                    <Button
+                      size='small'
+                      variant='outlined'
+                      onClick={() => dispatch(removeFromBasket(basketItem))}
+                    >
+                      Remove
+                    </Button>
+                  </Box>
                 </TableCell>
                 <TableCell align='center'>{basketItem.price}€</TableCell>
                 <TableCell align='center'>
@@ -122,20 +126,25 @@ const BasketList: React.FC = () => {
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow className={classes.summary}>
-              <Button
-                size='small'
-                variant='outlined'
-                className={classes.clearBtn}
-                onClick={() => dispatch(clearBasket())}
-              >
-                Clear Basket
-              </Button>
-              <Typography variant='overline' align='right'>
-                Subtotal
-              </Typography>
-              <span>{basket.basketTotalAmount}€</span>
-              <Typography variant='caption' align='right'>
+          </TableBody>
+        </Table>
+        <Grid display='flex' className={classes.summary}>
+          <Grid item xs={12} sm={8} md={8}>
+            <Button
+              size='small'
+              variant='outlined'
+              onClick={() => dispatch(clearBasket())}
+            >
+              Clear Basket
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={4} md={4}>
+            <Stack spacing={1}>
+              <Stack flexDirection='row' gap='60%'>
+                <Typography>Subtotal</Typography>
+                <Typography>{basket.basketTotalAmount}€</Typography>
+              </Stack>
+              <Typography variant='caption' align='left'>
                 Taxes and shipping calculated at checkout
               </Typography>
               <Button size='medium' variant='contained'>
@@ -146,9 +155,9 @@ const BasketList: React.FC = () => {
                   Continue Shopping
                 </Button>
               </Link>
-            </TableRow>
-          </TableBody>
-        </Table>
+            </Stack>
+          </Grid>
+        </Grid>
       </TableContainer>
     </div>
   );
