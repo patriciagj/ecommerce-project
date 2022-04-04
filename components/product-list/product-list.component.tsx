@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import Button from '@mui/material/Button';
 
-import useStyles from './product-list.styles';
+import useStyles from './product-list.component.styles';
 
 const ProductList: React.FC = () => {
   const classes = useStyles();
